@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +36,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 //ft.replace(R.id.FrameFragment, anotherFragment);
-                
+                if(anotherFragment.isAdded()){
+                    ft.show(anotherFragment);
+                    ft.remove(fragmentLain);
+                    Toast.makeText(getApplicationContext(), "Fragment Sudah Ditambahkan Sebelumnya", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    ft.replace(R.id.FrameFragment, anotherFragment);
+                }
                 ft.addToBackStack("Fragment Lain");
                 ft.commit();
 
